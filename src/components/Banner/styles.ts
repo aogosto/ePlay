@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { colors } from '../../styles'
 
 export const Container = styled.div`
@@ -40,13 +41,6 @@ export const Container = styled.div`
                     max-width: 216px;
                     height: auto;
                 }
-            }
-
-            a {
-                padding: 8px 0;
-                display: inline-block;
-                font-weight: bold;
-                text-transform: uppercase;
             }
         }
     }

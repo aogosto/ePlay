@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
 import Button from '../Button'
 import * as B from './styles'
 import type Game from '../../models/game'
+import Tag from '../Tag'
 
 type Props = {
     games: Game[]
@@ -21,10 +21,12 @@ const Banner = ({ games }: Props) => {
                             <h2>
                                 <img src={game.logo} alt={game.title} />
                             </h2>
-                            <Link to={'/'}>Promoção</Link>
+                            <Tag link={'/deals'} size={'small'}>
+                                Promoção
+                            </Tag>
                             <p>{game.description}</p>
                         </div>
-                        <Button>40% OFF</Button>
+                        <Button size={'large'}>R$ 199,90</Button>
                     </div>
                 </B.Container>
             ))}

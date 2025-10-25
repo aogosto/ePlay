@@ -1,11 +1,17 @@
 import * as T from './styles'
 
-type Props = {
+export type Props = {
     children: string
+    link: string
+    size: 'small' | 'x-small'
 }
 
-const Tag = ({ children }: Props) => {
-    return <T.Container>{children}</T.Container>
+const Tag = ({ children, link, size }: Props) => {
+    return (
+        <T.Container to={link} size={size}>
+            {children}
+        </T.Container>
+    )
 }
 
 export default Tag

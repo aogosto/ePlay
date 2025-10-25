@@ -2,10 +2,11 @@ import * as B from './styles'
 
 type Props = {
     children: string
+    size: 'small' | 'large'
 }
 
-const Button = ({ children }: Props) => {
-    return <B.Container>{children}</B.Container>
+const Button = ({ children, size }: Props) => {
+    return <B.Container size={size}>{children}</B.Container>
 }
 
 export default Button

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import type { Props } from '.'
 
-export const Container = styled.section<Omit<Props, 'games'>>`
+export const Container = styled.section<Omit<Props, 'games' | 'title'>>`
     padding: 56px 0;
     .container {
         h3 {
@@ -10,9 +10,7 @@ export const Container = styled.section<Omit<Props, 'games'>>`
         ul {
             display: grid;
             grid-template-columns: ${(props) =>
-                props.title === 'Promoções'
-                    ? 'repeat(3, 1fr)'
-                    : 'repeat(2, 1fr)'};
+                props.card === 'small' ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)'};
             grid-gap: 16px;
         }
     }

@@ -17,7 +17,6 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     a {
-        font-size: small;
         color: ${colors.tertiary};
 
         &:hover {
@@ -40,15 +39,19 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0 16px;
     }
 
-    .small {
+    .x-small {
+        font-size: x-small;
+    }
+
+    .small, a {
         font-size: small;
     }
 
-    .medium {
+    .medium, p {
         font-size: medium;
     }
 
-    .large {
+    .large, h3 {
         font-size: large;
     }
 `
