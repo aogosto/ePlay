@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import * as F from './styles'
 
 const Footer = () => {
+    const year = new Date().getFullYear()
+
     return (
         <F.Container>
             <div className="container">
@@ -48,9 +50,9 @@ const Footer = () => {
                     </div>
                 </div>
                 <p className="small">
-                    &copy; Aogosto. All rights reserved. All trademarks and
-                    registered trademarks are the property of their respective
-                    owners.
+                    {year} &copy; Aogosto. All rights reserved. All trademarks
+                    and registered trademarks are the property of their
+                    respective owners.
                 </p>
             </div>
         </F.Container>

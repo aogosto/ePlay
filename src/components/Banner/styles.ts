@@ -7,7 +7,7 @@ export const Container = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     height: 448px;
-    padding: 56px 0;
+    padding: 0 0 56px 0;
     position: relative;
 
     &:before {

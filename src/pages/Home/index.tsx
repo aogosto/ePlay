@@ -1,4 +1,5 @@
 import Banner from '../../components/Banner'
+import List from '../../components/List'
 import Section from '../../components/Section'
 import type Game from '../../models/game'
 
@@ -9,7 +10,7 @@ const Home = () => {
             logo: 'https://shared.steamstatic.com/store_item_assets/steam/apps/1817190/logo_2x.png?t=1750955016',
             title: "Marvel's Spider-Man: Miles Morales",
             description:
-                'After the events of Marvel’s Spider-Man Remastered, teenage Miles Morales is adjusting to his new home while following in the footsteps of his mentor, Peter Parker, as a new Spider-Man. When a fierce power struggle threatens to destroy his home, Miles must take up the mantle of Spider-Man and own it',
+                'After the events of Marvel’s Spider-Man Remastered, teenage Miles Morales is adjusting to his new home while following in the footsteps of his mentor, Peter Parker, as a new Spider-Man. When a fierce power struggle threatens to destroy his home, Miles must take up the mantle of Spider-Man and own it.',
             id: 1,
             infos: [],
             rating: '0',
@@ -86,8 +87,12 @@ const Home = () => {
     return (
         <>
             <Banner games={banner}></Banner>
-            <Section games={deals} title="Promoções" card={'small'}></Section>
-            <Section games={soon} title="Em Breve" card={'large'}></Section>
+            <Section title={'Promoções'}>
+                <List games={deals} card={'small'}></List>
+            </Section>
+            <Section title={'Em Breve'}>
+                <List games={soon} card={'large'}></List>
+            </Section>
         </>
     )
 }

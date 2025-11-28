@@ -18,9 +18,6 @@ export const Main = styled.main`
     div {
         display: flex;
         flex-wrap: wrap;
-        a {
-            margin-right: 6px;
-        }
     }
 `
 
@@ -28,6 +25,7 @@ export const Timer = styled.div<{ card: 'small' | 'large' }>`
     position: absolute;
     left: 0;
     right: 0;
+    top: 35%;
     margin-inline: auto;
     width: fit-content;
 `
