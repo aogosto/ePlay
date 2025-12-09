@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 import * as D from './styles'
+import type { GalleryItem } from '../Home'
 
 const play = (
     <svg
@@ -35,11 +37,6 @@ const zoom = (
     </svg>
 )
 
-type GalleryItem = {
-    type: 'image' | 'video'
-    url: string
-}
-
 const mock: GalleryItem[] = [
     {
         type: 'video',
@@ -63,7 +60,17 @@ type Props = {
     defaultCover: string
 }
 
+interface ModalState extends GalleryItem {
+    isVisible: boolean
+}
+
 const Details = ({ defaultCover }: Props) => {
+    const [modal, setModal] = useState<ModalState>({
+        isVisible: false,
+        type: 'image',
+        url: '',
+    })
+
     const getMediaCover = (item: GalleryItem) => {
         if (item.type === 'image') return item.url
         return defaultCover
@@ -72,6 +79,14 @@ const Details = ({ defaultCover }: Props) => {
     const getMediaIcon = (item: GalleryItem) => {
         if (item.type === 'image') return zoom
         return play
+    }
+
+    const closeModal = () => {
+        setModal({
+            isVisible: false,
+            type: 'image',
+            url: '',
+        })
     }
 
     return (
@@ -107,14 +122,23 @@ const Details = ({ defaultCover }: Props) => {
             <Section title={'Galeria'}>
                 <ul>
                     {mock.map((media) => (
-                        <li key={media.url}>
+                        <li
+                            key={media.url}
+                            onClick={() => {
+                                setModal({
+                                    isVisible: true,
+                                    type: media.type,
+                                    url: media.url,
+                                })
+                            }}
+                        >
                             <img src={getMediaCover(media)}></img>
                             <div>{getMediaIcon(media)}</div>
                         </li>
                     ))}
                 </ul>
             </Section>
-            <D.Modal>
+            <D.Modal className={modal.isVisible ? 'visible' : ''}>
                 <div className="container">
                     <header>
                         <h4>Spider Man</h4>
@@ -124,13 +148,25 @@ const Details = ({ defaultCover }: Props) => {
                             height="16"
                             fill="currentColor"
                             viewBox="0 0 16 16"
+                            onClick={() => {
+                                closeModal()
+                            }}
                         >
                             <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
                         </svg>
                     </header>
-                    <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817190/ss_a240e0c6f37569493ed749d9317718d8ce9f5d18.1920x1080.jpg?t=1763569499" />
+                    {modal.type === 'image' ? (
+                        <img src={modal.url}></img>
+                    ) : (
+                        <iframe src={modal.url}></iframe>
+                    )}
                 </div>
-                <div className="overlay"></div>
+                <div
+                    className="overlay"
+                    onClick={() => {
+                        closeModal()
+                    }}
+                ></div>
             </D.Modal>
         </D.Container>
     )

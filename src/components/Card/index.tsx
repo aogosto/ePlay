@@ -1,40 +1,66 @@
+import type { Game } from '../../pages/Home'
 import Button from '../Button'
 import Tag from '../Tag'
 import * as C from './styles'
 
 export type Props = {
-    hero: string
+    games: Game[]
     card: 'small' | 'large'
-    infos: string[]
-    title: string
-    rating: string
-    price: string
 }
 
-const Card = ({ hero, card, infos, title, rating, price }: Props) => {
+const Card = ({ games, card }: Props) => {
+    const formatPrices = (price: number) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+        }).format(price)
+    }
+
+    const getGameTags = (game: Game) => {
+        const tags = []
+
+        if (game.release_date) {
+            tags.push(game.release_date)
+        }
+
+        if (game.prices.discount) {
+            tags.push(`${game.prices.discount}%`)
+        }
+
+        if (game.prices.current) {
+            tags.push(formatPrices(game.prices.current))
+        }
+
+        return tags
+    }
+
     return (
-        <C.Container card={card}>
-            <img src={hero} alt="" />
-            <div>
-                <C.Header>
-                    <h2 className="x-small">{title}</h2>
-                    <p className="x-small">{rating}</p>
-                </C.Header>
-                <C.Main>
+        <>
+            {games.map((game) => (
+                <C.Container card={card}>
+                    <img src={game.media.thumbnail} alt="" />
                     <div>
-                        {infos.map((info) => (
-                            <Tag key={info} link={'/deals'} size={'x-small'}>
-                                {info}
-                            </Tag>
-                        ))}
+                        <C.Header>
+                            <h2 className="x-small">{game.name}</h2>
+                            <p className="x-small">{game.rating}</p>
+                        </C.Header>
+                        <C.Main>
+                            <div>
+                                <Tag link={'/deals'} size={'x-small'}>
+                                    {getGameTags(game)}
+                                </Tag>
+                            </div>
+                            <Button size={'small'}>
+                                {game.prices.current}
+                            </Button>
+                        </C.Main>
                     </div>
-                    <Button size={'small'}>{price}</Button>
-                </C.Main>
-            </div>
-            <C.Timer card={card}>
-                <h1>00:00:00</h1>
-            </C.Timer>
-        </C.Container>
+                    <C.Timer card={card}>
+                        <h1>{game.release_date}</h1>
+                    </C.Timer>
+                </C.Container>
+            ))}
+        </>
     )
 }
 

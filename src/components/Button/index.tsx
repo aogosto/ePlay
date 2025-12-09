@@ -1,7 +1,8 @@
+import type { ReactNode } from 'react'
 import * as B from './styles'
 
 type Props = {
-    children: string
+    children: ReactNode
     size: 'small' | 'large'
 }
 
