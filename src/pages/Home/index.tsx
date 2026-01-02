@@ -41,7 +41,9 @@ const Home = () => {
     const [soon, setSoon] = useState<Game[]>([])
 
     useEffect(() => {
-        fetch('https://api-ebac.vercel.app/api/eplay/promocoes')
+        fetch(
+            'https://raw.githubusercontent.com/aogosto/ePlay/refs/heads/main/api/deals.json'
+        )
             .then((res) => res.json())
             .then((res) => setDeals(res))
     }, [])
@@ -54,7 +56,7 @@ const Home = () => {
 
     return (
         <>
-            <Banner games={[]}></Banner>
+            <Banner games={deals}></Banner>
             <Section title={'Promoções'}>
                 <List games={deals} card={'small'}></List>
             </Section>

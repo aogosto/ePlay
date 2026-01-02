@@ -8,11 +8,13 @@ export const Header = styled.header`
 
 export const Main = styled.main`
     margin-top: 16px;
-    display: flex;
-    justify-content: space-between;
 
     button {
         height: 100%;
+        display: flex;
+        align-items: flex-end;
+        margin-left: auto;
+        margin-top: 32px;
     }
 
     div {
@@ -32,7 +34,7 @@ export const Timer = styled.div<{ card: 'small' | 'large' }>`
 
 export const Container = styled.li<{ card: 'small' | 'large' }>`
     border-radius: 6px;
-    border: 1px solid ${colors.secondary};
+    border: 2px solid ${colors.secondary};
     position: relative;
 
     img {

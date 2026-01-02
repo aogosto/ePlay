@@ -8,6 +8,13 @@ type Props = {
 }
 
 const Banner = ({ games }: Props) => {
+    const formatPrices = (price: number) => {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+        }).format(price)
+    }
+
     return (
         <>
             {games.map((game) => (
@@ -26,7 +33,9 @@ const Banner = ({ games }: Props) => {
                             </Tag>
                             <p>{game.description}</p>
                         </div>
-                        <Button size={'large'}>{game.prices.current}</Button>
+                        <Button size={'large'}>
+                            {formatPrices(game.prices.current || 0)}
+                        </Button>
                     </div>
                 </B.Container>
             ))}

@@ -19,16 +19,16 @@ const Card = ({ games, card }: Props) => {
     const getGameTags = (game: Game) => {
         const tags = []
 
+        if (game.details.category) {
+            tags.push(game.details.category)
+        }
+
         if (game.release_date) {
             tags.push(game.release_date)
         }
 
         if (game.prices.discount) {
-            tags.push(`${game.prices.discount}%`)
-        }
-
-        if (game.prices.current) {
-            tags.push(formatPrices(game.prices.current))
+            tags.push(`PROMOÇÃO`)
         }
 
         return tags
@@ -37,8 +37,8 @@ const Card = ({ games, card }: Props) => {
     return (
         <>
             {games.map((game) => (
-                <C.Container card={card}>
-                    <img src={game.media.thumbnail} alt="" />
+                <C.Container key={game.id} card={card}>
+                    <img src={game.media.header} alt="" />
                     <div>
                         <C.Header>
                             <h2 className="x-small">{game.name}</h2>
@@ -51,7 +51,19 @@ const Card = ({ games, card }: Props) => {
                                 </Tag>
                             </div>
                             <Button size={'small'}>
-                                {game.prices.current}
+                                {game.prices.discount ? (
+                                    <>
+                                        <span
+                                            style={{
+                                                textDecoration: 'line-through',
+                                            }}
+                                        >
+                                            {formatPrices(game.prices.old || 0)}
+                                        </span>
+                                    </>
+                                ) : (
+                                    formatPrices(game.prices.current || 0)
+                                )}
                             </Button>
                         </C.Main>
                     </div>
